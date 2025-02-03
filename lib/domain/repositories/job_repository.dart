@@ -1,0 +1,51 @@
+import 'package:dartz/dartz.dart';
+import '../../core/error/failures.dart';
+import '../../data/models/job.dart';
+
+abstract class JobRepository {
+  /// Get all jobs for a contractor
+  Future<Either<Failure, List<Job>>> getJobs(String contractorId);
+  
+  /// Get a specific job by ID
+  Future<Either<Failure, Job>> getJobById(String jobId);
+  
+  /// Start a job
+  Future<Either<Failure, Job>> startJob(String jobId, DateTime startTime);
+  
+  /// Complete a job
+  Future<Either<Failure, Job>> completeJob(String jobId, DateTime endTime);
+  
+  /// Update task status
+  Future<Either<Failure, Job>> updateTaskStatus(
+    String jobId, 
+    String taskId, 
+    bool isCompleted,
+    String completedBy
+  );
+  
+  /// Add notes to a job
+  Future<Either<Failure, Job>> addNotes(String jobId, String notes);
+  
+  /// Upload photos for a task
+  Future<Either<Failure, List<String>>> uploadTaskPhotos(
+    String jobId,
+    String taskId,
+    List<String> localPhotoPaths
+  );
+  
+  /// Check geofence status
+  Future<Either<Failure, bool>> isWithinGeofence(
+    String jobId,
+    GeoLocation currentLocation
+  );
+  
+  /// Get jobs for specific date range
+  Future<Either<Failure, List<Job>>> getJobsForDateRange(
+    String contractorId,
+    DateTime startDate,
+    DateTime endDate
+  );
+  
+  /// Sync offline changes
+  Future<Either<Failure, bool>> syncOfflineChanges();
+} 
