@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:two_local_gals_housekeeping/constants/app_colors.dart';
-import 'package:two_local_gals_housekeeping/constants/app_images.dart';
+import 'package:extra_set_of_mitts/constants/app_colors.dart';
+import 'package:extra_set_of_mitts/constants/app_images.dart';
 
 class LocationScreen extends StatefulWidget {
   const LocationScreen({super.key});

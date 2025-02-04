@@ -1,18 +1,17 @@
+import 'package:extra_set_of_mitts/constants/app_colors.dart';
+import 'package:extra_set_of_mitts/constants/app_images.dart';
 import 'package:flutter/material.dart';
-import 'package:two_local_gals_housekeeping/constants/app_colors.dart';
-import 'package:two_local_gals_housekeeping/constants/app_images.dart';
-
-import 'package:two_local_gals_housekeeping/constants/app_styling.dart';
-import 'package:two_local_gals_housekeeping/view/screens/job/job%20start/job_start.dart';
-import 'package:two_local_gals_housekeeping/view/widget/checkbox_widget.dart';
-import 'package:two_local_gals_housekeeping/view/widget/common_image_view_widget.dart';
-import 'package:two_local_gals_housekeeping/view/widget/custom_rectangle_btn.dart';
-
-import 'package:two_local_gals_housekeeping/view/widget/custom_top_card_buttons.dart';
-import 'package:two_local_gals_housekeeping/view/widget/my_container.dart';
-import 'package:two_local_gals_housekeeping/view/widget/my_text_widget.dart';
-
-import 'package:two_local_gals_housekeeping/view/widget/topDivider.dart';
+import 'package:extra_set_of_mitts/constants/app_styling.dart';
+import 'package:extra_set_of_mitts/view/screens/job/job start/job_start.dart';
+import 'package:extra_set_of_mitts/view/widget/checkbox_widget.dart';
+import 'package:extra_set_of_mitts/view/widget/common_image_view_widget.dart';
+import 'package:extra_set_of_mitts/view/widget/custom_rectangle_btn.dart';
+import 'package:get/get.dart';
+import 'package:extra_set_of_mitts/view/widget/custom_top_card_buttons.dart';
+import 'package:extra_set_of_mitts/view/widget/my_container.dart';
+import 'package:extra_set_of_mitts/view/widget/my_text_widget.dart';
+import 'package:extra_set_of_mitts/view/widget/shadow_container.dart';
+import 'package:extra_set_of_mitts/view/widget/topDivider.dart';
 
 class JobInfoScreen extends StatefulWidget {
   const JobInfoScreen({super.key});

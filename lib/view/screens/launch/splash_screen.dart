@@ -1,16 +1,17 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:two_local_gals_housekeeping/constants/app_colors.dart';
-
-import 'package:two_local_gals_housekeeping/constants/app_images.dart';
-import 'package:two_local_gals_housekeeping/constants/app_sizes.dart';
-import 'package:two_local_gals_housekeeping/constants/app_styling.dart';
-import 'package:two_local_gals_housekeeping/config/routes/routes.dart';
-
-import 'package:two_local_gals_housekeeping/view/widget/common_image_view_widget.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:extra_set_of_mitts/constants/app_colors.dart';
+import 'package:extra_set_of_mitts/presentation/bloc/auth/auth_bloc.dart';
+import 'package:extra_set_of_mitts/constants/app_images.dart';
+import 'package:extra_set_of_mitts/constants/app_sizes.dart';
+import 'package:extra_set_of_mitts/constants/app_styling.dart';
+import 'package:extra_set_of_mitts/config/routes/routes.dart';
+import 'package:extra_set_of_mitts/core/services/notification_service.dart';
+import 'package:extra_set_of_mitts/view/widget/common_image_view_widget.dart';
 
 class SplashScreen extends StatefulWidget {
   @override

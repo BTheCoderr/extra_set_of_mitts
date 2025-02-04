@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:two_local_gals_housekeeping/config/routes/routes.dart';
-import 'package:two_local_gals_housekeeping/constants/app_colors.dart';
-import 'package:two_local_gals_housekeeping/constants/app_images.dart';
-import 'package:two_local_gals_housekeeping/constants/app_styling.dart';
-import 'package:two_local_gals_housekeeping/view/widget/common_image_view_widget.dart';
-import 'package:two_local_gals_housekeeping/view/widget/custom_rectangle_btn.dart';
+import 'package:extra_set_of_mitts/config/routes/routes.dart';
+import 'package:extra_set_of_mitts/constants/app_colors.dart';
+import 'package:extra_set_of_mitts/constants/app_images.dart';
+import 'package:extra_set_of_mitts/constants/app_styling.dart';
+import 'package:extra_set_of_mitts/view/widget/common_image_view_widget.dart';
+import 'package:extra_set_of_mitts/view/widget/custom_rectangle_btn.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -16,28 +16,24 @@ class OnBoardingScreen extends StatefulWidget {
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   int currentIndex = 0;
-  final List<OnboardingContent> contents = [
-    OnboardingContent(
-      title: 'Welcome to 2LG',
-      subtitle: 'Your Housekeeping Partner',
-      description: 'Manage your schedule, track earnings, and provide excellent service - all in one place.',
-      icon: Assets.imagesWalkthrought1,
-      primaryAction: 'Get Started',
-      secondaryAction: 'Learn More',
+  final List<OnboardingPage> pages = [
+    OnboardingPage(
+      title: 'Welcome',
+      description: 'Your trusted cleaning service management app',
+      illustration: const WelcomeIllustration(),
+      color: Colors.teal[50]!,
     ),
-    OnboardingContent(
+    OnboardingPage(
       title: 'Smart Dashboard',
-      subtitle: 'Track Your Earnings',
-      description: 'View your daily, weekly, and upcoming earnings at a glance. Stay on top of your income with our intuitive dashboard.',
-      icon: Assets.imagesWalkthrought3,
-      showPayDashboard: true,
+      description: 'Track Your Earnings',
+      illustration: const SmartDashboardIllustration(),
+      color: Colors.blue[50]!,
     ),
-    OnboardingContent(
+    OnboardingPage(
       title: 'Job Management',
-      subtitle: 'Effortless Organization',
-      description: 'Access job details, start tasks, and navigate to locations seamlessly. Everything you need is just a tap away.',
-      icon: Assets.imagesWalkthrought4,
-      showJobList: true,
+      description: 'Effortless Organization',
+      illustration: const JobManagementIllustration(),
+      color: Colors.green[50]!,
     ),
   ];
 
@@ -107,7 +103,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               Expanded(
                 child: PageView.builder(
                   controller: _controller,
-                  itemCount: contents.length,
+                  itemCount: pages.length,
                   onPageChanged: (index) {
                     setState(() {
                       currentIndex = index;
@@ -127,34 +123,21 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                   maxHeight: size.height * 0.25,
                                   maxWidth: size.width * 0.8,
                                 ),
-                                child: CommonImageView(
-                                  imagePath: contents[i].icon,
-                                  fit: BoxFit.contain,
-                                ),
+                                child: pages[i].illustration,
                               ),
                             ),
                             const SizedBox(height: 32),
                             Text(
-                              contents[i].title,
+                              pages[i].title,
                               style: const TextStyle(
                                 fontSize: 32,
                                 fontWeight: FontWeight.bold,
                                 color: kTertiaryColor,
                               ),
                             ),
-                            if (contents[i].subtitle != null) ...[
-                              const SizedBox(height: 8),
-                              Text(
-                                contents[i].subtitle!,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.grey[700],
-                                ),
-                              ),
-                            ],
                             const SizedBox(height: 16),
                             Text(
-                              contents[i].description,
+                              pages[i].description,
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey[600],
@@ -162,10 +145,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                               ),
                             ),
                             const SizedBox(height: 24),
-                            if (contents[i].showPayDashboard)
-                              _buildPayDashboard(),
-                            if (contents[i].showJobList)
-                              _buildJobList(),
                             const SizedBox(height: 32),
                           ],
                         ),
@@ -192,14 +171,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: List.generate(
-                        contents.length,
+                        pages.length,
                         (index) => buildDot(index),
                       ),
                     ),
                     const SizedBox(height: 20),
                     CustomRectangleBtn(
                       onPressed: () {
-                        if (currentIndex == contents.length - 1) {
+                        if (currentIndex == pages.length - 1) {
                           Get.offNamed(AppLinks.home);
                         } else {
                           _controller.nextPage(
@@ -208,7 +187,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           );
                         }
                       },
-                      txt: currentIndex == contents.length - 1 ? 'Get Started' : 'Next',
+                      txt: currentIndex == pages.length - 1 ? 'Get Started' : 'Next',
                       btnRadius: 12,
                       backgroundBtnColor: kTertiaryColor,
                     ),
@@ -234,184 +213,18 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       ),
     );
   }
-
-  Widget _buildPayDashboard() {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 16),
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Earnings Overview',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: kTertiaryColor,
-            ),
-          ),
-          const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _buildPayColumn('Today', '6.5', '\$200', '\$27.26'),
-              _buildPayColumn('This Week', '27.5', '\$835', '\$28.45'),
-              _buildPayColumn('Next Week', '30', '\$864', '\$26.26'),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPayColumn(String title, String hours, String pay, String rate) {
-    return Column(
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-            color: Colors.grey[600],
-            fontSize: 14,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          hours,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          pay,
-          style: const TextStyle(
-            color: Colors.green,
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          rate,
-          style: TextStyle(
-            color: Colors.blue[600],
-            fontSize: 14,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildJobList() {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 16),
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Today\'s Schedule',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: kTertiaryColor,
-            ),
-          ),
-          const SizedBox(height: 20),
-          _buildJobItem('9:30 AM', '11:00 AM', '1.5', 'Brad Alien'),
-          const Divider(height: 24),
-          _buildJobItem('11:30 AM', '2:30 PM', '3', 'John Jones'),
-          const Divider(height: 24),
-          _buildJobItem('3:00 PM', '5:00 PM', '2', 'Sara Hill'),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildJobItem(String start, String end, String hours, String customer) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              customer,
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-              ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              '$start - $end',
-              style: TextStyle(
-                color: Colors.grey[600],
-                fontSize: 14,
-              ),
-            ),
-          ],
-        ),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-          decoration: BoxDecoration(
-            color: Colors.blue[50],
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Text(
-            '$hours hrs',
-            style: TextStyle(
-              color: Colors.blue[700],
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
 }
 
-class OnboardingContent {
+class OnboardingPage {
   final String title;
-  final String? subtitle;
   final String description;
-  final String icon;
-  final bool showPayDashboard;
-  final bool showJobList;
-  final String? primaryAction;
-  final String? secondaryAction;
+  final Widget illustration;
+  final Color color;
 
-  OnboardingContent({
+  OnboardingPage({
     required this.title,
-    this.subtitle,
     required this.description,
-    required this.icon,
-    this.showPayDashboard = false,
-    this.showJobList = false,
-    this.primaryAction,
-    this.secondaryAction,
+    required this.illustration,
+    required this.color,
   });
 }

@@ -1,6 +1,6 @@
+import 'package:extra_set_of_mitts/constants/app_colors.dart';
+import 'package:extra_set_of_mitts/constants/app_fonts.dart';
 import 'package:flutter/material.dart';
-import 'package:two_local_gals_housekeeping/constants/app_colors.dart';
-import 'package:two_local_gals_housekeeping/constants/app_fonts.dart';
 
 // ignore: must_be_immutable
 class CustomSimpleTextField extends StatelessWidget {

@@ -1,18 +1,18 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:two_local_gals_housekeeping/config/routes/routes.dart';
-import 'package:two_local_gals_housekeeping/constants/app_colors.dart';
-import 'package:two_local_gals_housekeeping/constants/app_images.dart';
-
-import 'package:two_local_gals_housekeeping/constants/app_styling.dart';
-import 'package:two_local_gals_housekeeping/view/screens/job/job%20info/job_info.dart';
-import 'package:two_local_gals_housekeeping/view/screens/location/location.dart';
-import 'package:two_local_gals_housekeeping/view/screens/setting/setting.dart';
-import 'package:two_local_gals_housekeeping/view/widget/common_image_view_widget.dart';
-import 'package:two_local_gals_housekeeping/view/widget/my_container.dart';
-import 'package:two_local_gals_housekeeping/view/widget/my_text_widget.dart';
-import 'package:two_local_gals_housekeeping/view/widget/topDivider.dart';
+import 'package:extra_set_of_mitts/config/routes/routes.dart';
+import 'package:extra_set_of_mitts/constants/app_colors.dart';
+import 'package:extra_set_of_mitts/constants/app_images.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:extra_set_of_mitts/constants/app_styling.dart';
+import 'package:extra_set_of_mitts/view/screens/job/job info/job_info.dart';
+import 'package:extra_set_of_mitts/view/screens/location/location.dart';
+import 'package:extra_set_of_mitts/view/screens/setting/setting.dart';
+import 'package:extra_set_of_mitts/view/widget/common_image_view_widget.dart';
+import 'package:extra_set_of_mitts/view/widget/my_container.dart';
+import 'package:extra_set_of_mitts/view/widget/my_text_widget.dart';
+import 'package:extra_set_of_mitts/view/widget/topDivider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

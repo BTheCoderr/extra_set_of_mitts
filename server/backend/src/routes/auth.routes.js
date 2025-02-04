@@ -9,8 +9,8 @@ const {
 } = require('../controllers/auth.controller');
 
 // Public routes
-router.post('/register', register);
-router.post('/login', login);
+router.post('/signup', register);
+router.post('/signin', login);
 
 // Protected routes
 router.get('/profile', auth, getProfile);

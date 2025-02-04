@@ -1,9 +1,9 @@
+import 'package:extra_set_of_mitts/constants/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:two_local_gals_housekeeping/constants/app_colors.dart';
 
 // ignore: must_be_immutable
 class CustomTextField extends StatelessWidget {
-  TextEditingController controller = TextEditingController();
+  final TextEditingController controller;
   final double radius;
   final double borderRadius;
   final Color borderColor;
@@ -26,47 +26,47 @@ class CustomTextField extends StatelessWidget {
   final double right;
   final double top;
   final double bottom;
-  final String suffixIcon;
-  final bool suffixIconNeed;
+  final String? prefixIcon;
+  final Widget? suffixIcon;
   final bool obscureText;
   final double iconScale;
   final bool prefixIconNeed;
-  final String prefixIcon;
+  final String prefixIconString;
   final Color prefixIconColor;
   //final bool needSvgInPrefix;
 
-  CustomTextField({
+  const CustomTextField({
     super.key,
     required this.controller,
     this.radius = 12,
-    this.borderRadius = 0,
-    this.borderColor = kTransparentColor,
-    this.borderWidth = 0,
-    this.focusedBorderColor = kGreyColor2,
+    this.borderRadius = 12,
+    this.borderColor = kPrimaryColor,
+    this.borderWidth = 1,
+    this.suffixIconColor = kPrimaryColor,
+    this.focusedBorderColor = kPrimaryColor,
     this.focusedBorderWidth = 1,
     this.outlineBorderColor = kPrimaryColor,
     this.outlineBorderWidth = 1,
     required this.hintText,
-    this.hintTextFontColor = kGreyColor2,
     this.hintTextFontSize = 14,
+    this.hintTextFontColor = kPrimaryColor,
     this.filled = true,
-    this.backgroundColor = kPrimaryColor,
-    this.contentPaddingLeft = 0,
-    this.contentPaddingRight = 0,
-    this.contentPaddingBottom = 18,
-    this.contentPaddingTop = 18,
-    this.left = 0,
-    this.right = 0,
-    this.top = 0,
-    this.bottom = 0,
-    this.suffixIcon = '',
-    this.suffixIconNeed = false,
+    this.backgroundColor = kTertiaryColor,
+    this.contentPaddingLeft = 20,
+    this.contentPaddingRight = 20,
+    this.contentPaddingBottom = 20,
+    this.contentPaddingTop = 20,
+    this.left = 20,
+    this.right = 20,
+    this.top = 20,
+    this.bottom = 20,
+    this.prefixIcon,
+    this.suffixIcon,
     this.obscureText = false,
     this.iconScale = 4,
-    this.suffixIconColor = kGreyColor2,
     this.prefixIconNeed = false,
-    this.prefixIcon = '',
-    this.prefixIconColor = kGreyColor2,
+    this.prefixIconString = '',
+    this.prefixIconColor = kPrimaryColor,
     //this.needSvgInPrefix = false,
   });
 
@@ -82,12 +82,9 @@ class CustomTextField extends StatelessWidget {
         decoration: InputDecoration(
           prefixIcon: (prefixIconNeed == false)
               ? null
-              : Image.asset(prefixIcon,
+              : Image.asset(prefixIconString,
                   scale: iconScale, color: prefixIconColor),
-          suffixIcon: (suffixIconNeed == false)
-              ? null
-              : Image.asset(suffixIcon,
-                  scale: iconScale, color: suffixIconColor),
+          suffixIcon: suffixIcon,
           filled: filled,
           fillColor: backgroundColor,
           hintText: hintText,

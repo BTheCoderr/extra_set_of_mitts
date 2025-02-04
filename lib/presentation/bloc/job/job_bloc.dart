@@ -1,118 +1,88 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:equatable/equatable.dart';
+import '../../../domain/entities/job.dart';
 import '../../../domain/repositories/job_repository.dart';
-import '../../../data/models/job.dart';
 
-part 'job_event.dart';
-part 'job_state.dart';
-part 'job_bloc.freezed.dart';
+// Events
+abstract class JobEvent extends Equatable {
+  const JobEvent();
 
+  @override
+  List<Object> get props => [];
+}
+
+class LoadJobs extends JobEvent {}
+
+class AddJob extends JobEvent {
+  final Job job;
+
+  const AddJob(this.job);
+
+  @override
+  List<Object> get props => [job];
+}
+
+// States
+abstract class JobState extends Equatable {
+  const JobState();
+
+  @override
+  List<Object> get props => [];
+}
+
+class JobInitial extends JobState {}
+
+class JobLoading extends JobState {}
+
+class JobLoaded extends JobState {
+  final List<Job> jobs;
+
+  const JobLoaded(this.jobs);
+
+  @override
+  List<Object> get props => [jobs];
+}
+
+class JobError extends JobState {
+  final String message;
+
+  const JobError(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
+
+// Bloc
 class JobBloc extends Bloc<JobEvent, JobState> {
   final JobRepository repository;
 
-  JobBloc({required this.repository}) : super(const JobState.initial()) {
-    on<JobEvent>((event, emit) async {
-      await event.map(
-        loadJobs: (e) => _onLoadJobs(e, emit),
-        startJob: (e) => _onStartJob(e, emit),
-        completeTask: (e) => _onCompleteTask(e, emit),
-        uploadPhotos: (e) => _onUploadPhotos(e, emit),
-        checkGeofence: (e) => _onCheckGeofence(e, emit),
-      );
-    });
-  }
-
-  Future<void> _onLoadJobs(_LoadJobs event, Emitter<JobState> emit) async {
-    emit(const JobState.loading());
-
-    final result = await repository.getJobs(event.contractorId);
-    
-    result.fold(
-      (failure) => emit(JobState.error(failure.toString())),
-      (jobs) => emit(JobState.loaded(jobs))
-    );
-  }
-
-  Future<void> _onStartJob(_StartJob event, Emitter<JobState> emit) async {
-    emit(const JobState.loading());
-
-    final geofenceResult = await repository.isWithinGeofence(
-      event.jobId,
-      event.location
-    );
-
-    await geofenceResult.fold(
-      (failure) async => emit(JobState.error(failure.toString())),
-      (isWithinGeofence) async {
-        if (!isWithinGeofence) {
-          emit(const JobState.geofenceError());
-          return;
-        }
-
-        final result = await repository.startJob(
-          event.jobId,
-          DateTime.now()
+  JobBloc({required this.repository}) : super(JobInitial()) {
+    on<LoadJobs>((event, emit) async {
+      emit(JobLoading());
+      try {
+        final jobs = await repository.getJobs();
+        jobs.fold(
+          (failure) => emit(JobError(failure.message)),
+          (jobs) => emit(JobLoaded(jobs)),
         );
-
-        result.fold(
-          (failure) => emit(JobState.error(failure.toString())),
-          (job) => emit(JobState.jobStarted(job))
-        );
+      } catch (e) {
+        emit(JobError(e.toString()));
       }
-    );
-  }
+    });
 
-  Future<void> _onCompleteTask(
-    _CompleteTask event,
-    Emitter<JobState> emit
-  ) async {
-    emit(const JobState.loading());
-
-    final result = await repository.updateTaskStatus(
-      event.jobId,
-      event.taskId,
-      true,
-      event.completedBy
-    );
-
-    result.fold(
-      (failure) => emit(JobState.error(failure.toString())),
-      (job) => emit(JobState.taskCompleted(job))
-    );
-  }
-
-  Future<void> _onUploadPhotos(
-    _UploadPhotos event,
-    Emitter<JobState> emit
-  ) async {
-    emit(const JobState.loading());
-
-    final result = await repository.uploadTaskPhotos(
-      event.jobId,
-      event.taskId,
-      event.photoPaths
-    );
-
-    result.fold(
-      (failure) => emit(JobState.error(failure.toString())),
-      (urls) => emit(JobState.photosUploaded(urls))
-    );
-  }
-
-  Future<void> _onCheckGeofence(
-    _CheckGeofence event,
-    Emitter<JobState> emit
-  ) async {
-    emit(const JobState.loading());
-
-    final result = await repository.isWithinGeofence(
-      event.jobId,
-      event.location
-    );
-
-    result.fold(
-      (failure) => emit(JobState.error(failure.toString())),
-      (isWithinGeofence) => emit(JobState.geofenceChecked(isWithinGeofence))
-    );
+    on<AddJob>((event, emit) async {
+      final currentState = state;
+      if (currentState is JobLoaded) {
+        try {
+          final result = await repository.addJob(event.job);
+          result.fold(
+            (failure) => emit(JobError(failure.message)),
+            (_) => emit(JobLoaded([...currentState.jobs, event.job])),
+          );
+        } catch (e) {
+          emit(JobError(e.toString()));
+        }
+      }
+    });
   }
 } 

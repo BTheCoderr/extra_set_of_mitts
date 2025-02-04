@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:two_local_gals_housekeeping/constants/app_colors.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:extra_set_of_mitts/constants/app_colors.dart';
 
 class CommonImageView extends StatelessWidget {
 // ignore_for_file: must_be_immutable

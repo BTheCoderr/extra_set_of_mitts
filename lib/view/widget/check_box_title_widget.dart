@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:two_local_gals_housekeeping/constants/app_colors.dart';
-import 'package:two_local_gals_housekeeping/view/widget/checkbox_widget.dart';
-import 'package:two_local_gals_housekeeping/view/widget/my_text_widget.dart';
+import 'package:extra_set_of_mitts/constants/app_colors.dart';
+import 'package:extra_set_of_mitts/view/widget/checkbox_widget.dart';
+import 'package:extra_set_of_mitts/view/widget/my_text_widget.dart';
 
 class CheckBoxTitleWidget extends StatelessWidget {
   final bool isChecked;

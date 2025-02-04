@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:two_local_gals_housekeeping/constants/app_colors.dart';
-import 'package:two_local_gals_housekeeping/constants/app_images.dart';
-import 'package:two_local_gals_housekeeping/constants/app_styling.dart';
-import 'package:two_local_gals_housekeeping/view/screens/onboarding/onboarding_screen.dart';
-import 'package:two_local_gals_housekeeping/view/screens/setting/update_address/update_address.dart';
-import 'package:two_local_gals_housekeeping/view/screens/setting/update_profile_picture/update_profile.dart';
-import 'package:two_local_gals_housekeeping/view/screens/setting/update_unavailability/unavailability.dart';
-
-import 'package:two_local_gals_housekeeping/view/widget/common_image_view_widget.dart';
-
-import 'package:two_local_gals_housekeeping/view/widget/my_container.dart';
-import 'package:two_local_gals_housekeeping/view/widget/my_text_widget.dart';
-import 'package:two_local_gals_housekeeping/view/widget/shadow_container.dart';
-import 'package:two_local_gals_housekeeping/view/widget/topDivider.dart';
+import 'package:extra_set_of_mitts/constants/app_colors.dart';
+import 'package:extra_set_of_mitts/constants/app_images.dart';
+import 'package:extra_set_of_mitts/constants/app_styling.dart';
+import 'package:extra_set_of_mitts/view/screens/onboarding/onboarding_screen.dart';
+import 'package:extra_set_of_mitts/view/screens/setting/update_address/update_address.dart';
+import 'package:extra_set_of_mitts/view/screens/setting/update_profile_picture/update_profile.dart';
+import 'package:extra_set_of_mitts/view/screens/setting/update_unavailability/unavailability.dart';
+import 'package:get/get.dart';
+import 'package:extra_set_of_mitts/view/widget/common_image_view_widget.dart';
+import 'package:extra_set_of_mitts/view/widget/my_container.dart';
+import 'package:extra_set_of_mitts/view/widget/my_text_widget.dart';
+import 'package:extra_set_of_mitts/view/widget/shadow_container.dart';
+import 'package:extra_set_of_mitts/view/widget/topDivider.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});

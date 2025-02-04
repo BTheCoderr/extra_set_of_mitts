@@ -1,9 +1,10 @@
 import 'package:get/get.dart';
-import 'package:two_local_gals_housekeeping/view/screens/auth/login/login.dart';
-import 'package:two_local_gals_housekeeping/view/screens/home/home.dart';
-import 'package:two_local_gals_housekeeping/view/screens/job/job%20info/job_info.dart';
-import 'package:two_local_gals_housekeeping/view/screens/launch/splash_screen.dart';
-import 'package:two_local_gals_housekeeping/view/screens/onboarding/onboarding_screen.dart';
+import 'package:extra_set_of_mitts/view/screens/home/home.dart';
+import 'package:extra_set_of_mitts/view/screens/job/job%20info/job_info.dart';
+import 'package:extra_set_of_mitts/view/screens/launch/splash_screen.dart';
+import 'package:extra_set_of_mitts/view/screens/onboarding/onboarding_screen.dart';
+import 'package:extra_set_of_mitts/presentation/screens/login_screen.dart';
+import 'package:extra_set_of_mitts/presentation/screens/signup_screen.dart';
 
 class AppRoutes {
   static final List<GetPage> pages = [
@@ -13,7 +14,11 @@ class AppRoutes {
     ),
     GetPage(
       name: AppLinks.login,
-      page: () => Login(),
+      page: () => LoginScreen(),
+    ),
+    GetPage(
+      name: AppLinks.signup,
+      page: () => SignUpScreen(),
     ),
     GetPage(
       name: AppLinks.onboarding,
@@ -33,6 +38,7 @@ class AppRoutes {
 class AppLinks {
   static const splashScreen = '/splash_screen';
   static const login = '/login';
+  static const signup = '/signup';
   static const onboarding = '/onboarding';
   static const home = '/home';
   static const jobInfo = '/job_info';

@@ -1,21 +1,21 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:two_local_gals_housekeeping/constants/app_colors.dart';
-import 'package:two_local_gals_housekeeping/constants/app_images.dart';
-import 'package:two_local_gals_housekeeping/constants/app_styling.dart';
-import 'package:two_local_gals_housekeeping/view/screens/cleaning_completed/cleaning_completed.dart';
-import 'package:two_local_gals_housekeeping/view/screens/cleaning_not_completed/cleaning_not_completed.dart';
-import 'package:two_local_gals_housekeeping/view/screens/finish_job/finish_job.dart';
-import 'package:two_local_gals_housekeeping/view/screens/job/job%20info/job_info.dart';
-import 'package:two_local_gals_housekeeping/view/widget/check_box_&_addbtn_card.dart';
-import 'package:two_local_gals_housekeeping/view/widget/check_box_title_widget.dart';
-import 'package:two_local_gals_housekeeping/view/widget/common_image_view_widget.dart';
-import 'package:two_local_gals_housekeeping/view/widget/custom_rectangle_btn.dart';
-import 'package:two_local_gals_housekeeping/view/widget/custom_simple_textField.dart';
-import 'package:two_local_gals_housekeeping/view/widget/custom_top_card_buttons.dart';
-import 'package:two_local_gals_housekeeping/view/widget/my_container.dart';
-import 'package:two_local_gals_housekeeping/view/widget/my_text_widget.dart';
-import 'package:two_local_gals_housekeeping/view/widget/topDivider.dart';
+import 'package:extra_set_of_mitts/constants/app_colors.dart';
+import 'package:extra_set_of_mitts/constants/app_images.dart';
+import 'package:extra_set_of_mitts/constants/app_styling.dart';
+import 'package:extra_set_of_mitts/view/screens/cleaning_completed/cleaning_completed.dart';
+import 'package:extra_set_of_mitts/view/screens/cleaning_not_completed/cleaning_not_completed.dart';
+import 'package:extra_set_of_mitts/view/screens/finish_job/finish_job.dart';
+import 'package:extra_set_of_mitts/view/screens/job/job info/job_info.dart';
+import 'package:extra_set_of_mitts/view/widget/check_box_&_addbtn_card.dart';
+import 'package:extra_set_of_mitts/view/widget/check_box_title_widget.dart';
+import 'package:extra_set_of_mitts/view/widget/common_image_view_widget.dart';
+import 'package:extra_set_of_mitts/view/widget/custom_rectangle_btn.dart';
+import 'package:extra_set_of_mitts/view/widget/custom_simple_textField.dart';
+import 'package:extra_set_of_mitts/view/widget/custom_top_card_buttons.dart';
+import 'package:extra_set_of_mitts/view/widget/my_container.dart';
+import 'package:extra_set_of_mitts/view/widget/my_text_widget.dart';
+import 'package:extra_set_of_mitts/view/widget/topDivider.dart';
 
 class JobStartScreen extends StatefulWidget {
   const JobStartScreen({super.key});
@@ -168,7 +168,7 @@ class _JobStartScreenState extends State<JobStartScreen> {
                                         MyText(
                                           paddingTop: 5,
                                           text:
-                                              "3 Cats and 1 Dog. Dog would be in the office with wife . They’re both working from home. Aren’t looking for a full house clean. We mostly want to have the main living area’s covered, so Kitchen/Dining Room, Living Room,  Bathrooms, NO BEDROOMS/OFFICES. They have a vacuum they’d like you to use, they’ll have it out work for you. ",
+                                              "3 Cats and 1 Dog. Dog would be in the office with wife . They're both working from home. Aren't looking for a full house clean. We mostly want to have the main living area's covered, so Kitchen/Dining Room, Living Room,  Bathrooms, NO BEDROOMS/OFFICES. They have a vacuum they'd like you to use, they'll have it out work for you. ",
                                           weight: FontWeight.w400,
                                           size: 14,
                                           color: kGreyColor2,

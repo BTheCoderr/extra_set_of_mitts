@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:two_local_gals_housekeeping/constants/app_colors.dart';
-import 'package:two_local_gals_housekeeping/view/widget/my_text_widget.dart';
+import 'package:extra_set_of_mitts/constants/app_colors.dart';
+import 'package:extra_set_of_mitts/view/widget/my_text_widget.dart';
 
 class CustomRectangleBtn extends StatelessWidget {
   final VoidCallback onPressed;
@@ -9,6 +9,7 @@ class CustomRectangleBtn extends StatelessWidget {
   final Color backgroundBtnColor;
   final Color borderSideColor;
   final double borderStroke;
+  final bool isLoading;
 
   final double btnHeight;
   final double btnWidth;
@@ -28,26 +29,43 @@ class CustomRectangleBtn extends StatelessWidget {
     this.txtColor = kPrimaryColor,
     this.backgroundBtnColor = kTertiaryColor,
     this.borderSideColor = kTransparentColor,
-    this.borderStroke = 0,
+    this.borderStroke = 1,
+    this.isLoading = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return SizedBox(
+      height: btnHeight,
+      width: btnWidth,
+      child: ElevatedButton(
+        onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: backgroundBtnColor,
-          elevation: 0,
-          side: BorderSide(width: borderStroke, color: borderSideColor),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(btnRadius)),
-          minimumSize: Size(btnWidth, btnHeight),
+            borderRadius: BorderRadius.circular(btnRadius),
+            side: BorderSide(
+              color: borderSideColor,
+              width: borderStroke,
+            ),
+          ),
         ),
-        onPressed: onPressed,
-        child: MyText(
-          text: txt,
-          weight: fontWeight,
-          color: txtColor,
-          size: textSize,
-        ));
+        child: isLoading
+            ? const SizedBox(
+                height: 20,
+                width: 20,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(kPrimaryColor),
+                ),
+              )
+            : MyText(
+                text: txt,
+                color: txtColor,
+                weight: fontWeight,
+                size: textSize,
+              ),
+      ),
+    );
   }
 }

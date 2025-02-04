@@ -1,6 +1,6 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:two_local_gals_housekeeping/constants/app_colors.dart';
+import 'package:extra_set_of_mitts/constants/app_colors.dart';
 
 class TopDivider extends StatelessWidget {
   final Color clr;

@@ -10,11 +10,13 @@ const generateToken = (userId) => {
 // Register new user
 const register = async (req, res) => {
     try {
+        console.log('Register request body:', req.body);
         const { email, password, name, address } = req.body;
 
         // Check if user already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
+            console.log('User already exists:', email);
             return res.status(400).json({ message: 'Email already registered' });
         }
 
@@ -27,6 +29,7 @@ const register = async (req, res) => {
         });
 
         await user.save();
+        console.log('New user created:', user._id);
 
         // Generate token
         const token = generateToken(user._id);
@@ -41,6 +44,7 @@ const register = async (req, res) => {
             }
         });
     } catch (error) {
+        console.error('Registration error:', error);
         res.status(400).json({ message: error.message });
     }
 };
@@ -48,16 +52,19 @@ const register = async (req, res) => {
 // Login user
 const login = async (req, res) => {
     try {
+        console.log('Login request body:', req.body);
         const { email, password } = req.body;
 
         // Find user
         const user = await User.findOne({ email });
         if (!user) {
+            console.log('User not found:', email);
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
         // Check password
         const isMatch = await user.comparePassword(password);
+        console.log('Password match:', isMatch);
         if (!isMatch) {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
@@ -75,6 +82,7 @@ const login = async (req, res) => {
             }
         });
     } catch (error) {
+        console.error('Login error:', error);
         res.status(400).json({ message: error.message });
     }
 };

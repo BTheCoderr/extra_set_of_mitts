@@ -1,13 +1,14 @@
 import 'package:dartz/dartz.dart';
+import '../entities/job.dart';
+import '../entities/geo_location.dart';
 import '../../core/error/failures.dart';
-import '../../data/models/job.dart';
 
 abstract class JobRepository {
   /// Get all jobs for a contractor
-  Future<Either<Failure, List<Job>>> getJobs(String contractorId);
+  Future<Either<Failure, List<Job>>> getJobs();
   
   /// Get a specific job by ID
-  Future<Either<Failure, Job>> getJobById(String jobId);
+  Future<Either<Failure, Job>> getJob(String id);
   
   /// Start a job
   Future<Either<Failure, Job>> startJob(String jobId, DateTime startTime);
@@ -48,4 +49,14 @@ abstract class JobRepository {
   
   /// Sync offline changes
   Future<Either<Failure, bool>> syncOfflineChanges();
+  
+  Future<Either<Failure, Job>> saveJob(Job job);
+  Future<Either<Failure, bool>> deleteJob(String jobId);
+  Future<Either<Failure, List<String>>> uploadPendingPhotos(String jobId, String taskId);
+  Future<Either<Failure, bool>> addJob(Job job);
+  Future<Either<Failure, Job>> updateJob(Job job);
+  Future<Either<Failure, List<String>>> uploadPhotos(String jobId, List<String> photoPaths);
+  Future<Either<Failure, Unit>> updateJobStatus(String id, String status);
+  Future<Either<Failure, Unit>> updateJobLocation(String id, GeoLocation location);
+  Future<Either<Failure, List<String>>> getPhotoUrls(String jobId);
 } 

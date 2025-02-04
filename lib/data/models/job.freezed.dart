@@ -14,67 +14,91 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-Job _$JobFromJson(Map<String, dynamic> json) {
-  return _Job.fromJson(json);
+JobModel _$JobModelFromJson(Map<String, dynamic> json) {
+  return _JobModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Job {
+mixin _$JobModel {
+  @HiveField(0)
   String get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String get customerId => throw _privateConstructorUsedError;
+  @HiveField(2)
   String get customerName => throw _privateConstructorUsedError;
+  @HiveField(3)
   String get address => throw _privateConstructorUsedError;
+  @HiveField(4)
   DateTime get scheduledStartTime => throw _privateConstructorUsedError;
+  @HiveField(5)
   DateTime get scheduledEndTime => throw _privateConstructorUsedError;
+  @HiveField(6)
   List<String> get assignedContractors => throw _privateConstructorUsedError;
+  @HiveField(7)
   JobStatus get status => throw _privateConstructorUsedError;
+  @HiveField(8)
   List<CleaningTask> get tasks => throw _privateConstructorUsedError;
+  @HiveField(9)
   String? get notes => throw _privateConstructorUsedError;
+  @HiveField(10)
   DateTime? get actualStartTime => throw _privateConstructorUsedError;
+  @HiveField(11)
   DateTime? get actualEndTime => throw _privateConstructorUsedError;
-  bool get requiresKey => throw _privateConstructorUsedError;
+  @HiveField(12)
   bool get photosRequired => throw _privateConstructorUsedError;
+  @HiveField(13)
   GeoLocation? get location => throw _privateConstructorUsedError;
+  @HiveField(14)
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  @HiveField(15)
+  DateTime? get completedAt => throw _privateConstructorUsedError;
 
+  /// Serializes this JobModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $JobCopyWith<Job> get copyWith => throw _privateConstructorUsedError;
+
+  /// Create a copy of JobModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $JobModelCopyWith<JobModel> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $JobCopyWith<$Res> {
-  factory $JobCopyWith(Job value, $Res Function(Job) then) =
-      _$JobCopyWithImpl<$Res, Job>;
+abstract class $JobModelCopyWith<$Res> {
+  factory $JobModelCopyWith(JobModel value, $Res Function(JobModel) then) =
+      _$JobModelCopyWithImpl<$Res, JobModel>;
   @useResult
   $Res call(
-      {String id,
-      String customerId,
-      String customerName,
-      String address,
-      DateTime scheduledStartTime,
-      DateTime scheduledEndTime,
-      List<String> assignedContractors,
-      JobStatus status,
-      List<CleaningTask> tasks,
-      String? notes,
-      DateTime? actualStartTime,
-      DateTime? actualEndTime,
-      bool requiresKey,
-      bool photosRequired,
-      GeoLocation? location});
-
-  $GeoLocationCopyWith<$Res>? get location;
+      {@HiveField(0) String id,
+      @HiveField(1) String customerId,
+      @HiveField(2) String customerName,
+      @HiveField(3) String address,
+      @HiveField(4) DateTime scheduledStartTime,
+      @HiveField(5) DateTime scheduledEndTime,
+      @HiveField(6) List<String> assignedContractors,
+      @HiveField(7) JobStatus status,
+      @HiveField(8) List<CleaningTask> tasks,
+      @HiveField(9) String? notes,
+      @HiveField(10) DateTime? actualStartTime,
+      @HiveField(11) DateTime? actualEndTime,
+      @HiveField(12) bool photosRequired,
+      @HiveField(13) GeoLocation? location,
+      @HiveField(14) DateTime createdAt,
+      @HiveField(15) DateTime? completedAt});
 }
 
 /// @nodoc
-class _$JobCopyWithImpl<$Res, $Val extends Job> implements $JobCopyWith<$Res> {
-  _$JobCopyWithImpl(this._value, this._then);
+class _$JobModelCopyWithImpl<$Res, $Val extends JobModel>
+    implements $JobModelCopyWith<$Res> {
+  _$JobModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of JobModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -90,9 +114,10 @@ class _$JobCopyWithImpl<$Res, $Val extends Job> implements $JobCopyWith<$Res> {
     Object? notes = freezed,
     Object? actualStartTime = freezed,
     Object? actualEndTime = freezed,
-    Object? requiresKey = null,
     Object? photosRequired = null,
     Object? location = freezed,
+    Object? createdAt = null,
+    Object? completedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -143,10 +168,6 @@ class _$JobCopyWithImpl<$Res, $Val extends Job> implements $JobCopyWith<$Res> {
           ? _value.actualEndTime
           : actualEndTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      requiresKey: null == requiresKey
-          ? _value.requiresKey
-          : requiresKey // ignore: cast_nullable_to_non_nullable
-              as bool,
       photosRequired: null == photosRequired
           ? _value.photosRequired
           : photosRequired // ignore: cast_nullable_to_non_nullable
@@ -155,55 +176,55 @@ class _$JobCopyWithImpl<$Res, $Val extends Job> implements $JobCopyWith<$Res> {
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as GeoLocation?,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      completedAt: freezed == completedAt
+          ? _value.completedAt
+          : completedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $GeoLocationCopyWith<$Res>? get location {
-    if (_value.location == null) {
-      return null;
-    }
-
-    return $GeoLocationCopyWith<$Res>(_value.location!, (value) {
-      return _then(_value.copyWith(location: value) as $Val);
-    });
   }
 }
 
 /// @nodoc
-abstract class _$$JobImplCopyWith<$Res> implements $JobCopyWith<$Res> {
-  factory _$$JobImplCopyWith(_$JobImpl value, $Res Function(_$JobImpl) then) =
-      __$$JobImplCopyWithImpl<$Res>;
+abstract class _$$JobModelImplCopyWith<$Res>
+    implements $JobModelCopyWith<$Res> {
+  factory _$$JobModelImplCopyWith(
+          _$JobModelImpl value, $Res Function(_$JobModelImpl) then) =
+      __$$JobModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {String id,
-      String customerId,
-      String customerName,
-      String address,
-      DateTime scheduledStartTime,
-      DateTime scheduledEndTime,
-      List<String> assignedContractors,
-      JobStatus status,
-      List<CleaningTask> tasks,
-      String? notes,
-      DateTime? actualStartTime,
-      DateTime? actualEndTime,
-      bool requiresKey,
-      bool photosRequired,
-      GeoLocation? location});
-
-  @override
-  $GeoLocationCopyWith<$Res>? get location;
+      {@HiveField(0) String id,
+      @HiveField(1) String customerId,
+      @HiveField(2) String customerName,
+      @HiveField(3) String address,
+      @HiveField(4) DateTime scheduledStartTime,
+      @HiveField(5) DateTime scheduledEndTime,
+      @HiveField(6) List<String> assignedContractors,
+      @HiveField(7) JobStatus status,
+      @HiveField(8) List<CleaningTask> tasks,
+      @HiveField(9) String? notes,
+      @HiveField(10) DateTime? actualStartTime,
+      @HiveField(11) DateTime? actualEndTime,
+      @HiveField(12) bool photosRequired,
+      @HiveField(13) GeoLocation? location,
+      @HiveField(14) DateTime createdAt,
+      @HiveField(15) DateTime? completedAt});
 }
 
 /// @nodoc
-class __$$JobImplCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$JobImpl>
-    implements _$$JobImplCopyWith<$Res> {
-  __$$JobImplCopyWithImpl(_$JobImpl _value, $Res Function(_$JobImpl) _then)
+class __$$JobModelImplCopyWithImpl<$Res>
+    extends _$JobModelCopyWithImpl<$Res, _$JobModelImpl>
+    implements _$$JobModelImplCopyWith<$Res> {
+  __$$JobModelImplCopyWithImpl(
+      _$JobModelImpl _value, $Res Function(_$JobModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of JobModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -219,11 +240,12 @@ class __$$JobImplCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$JobImpl>
     Object? notes = freezed,
     Object? actualStartTime = freezed,
     Object? actualEndTime = freezed,
-    Object? requiresKey = null,
     Object? photosRequired = null,
     Object? location = freezed,
+    Object? createdAt = null,
+    Object? completedAt = freezed,
   }) {
-    return _then(_$JobImpl(
+    return _then(_$JobModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -272,10 +294,6 @@ class __$$JobImplCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$JobImpl>
           ? _value.actualEndTime
           : actualEndTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      requiresKey: null == requiresKey
-          ? _value.requiresKey
-          : requiresKey // ignore: cast_nullable_to_non_nullable
-              as bool,
       photosRequired: null == photosRequired
           ? _value.photosRequired
           : photosRequired // ignore: cast_nullable_to_non_nullable
@@ -284,49 +302,66 @@ class __$$JobImplCopyWithImpl<$Res> extends _$JobCopyWithImpl<$Res, _$JobImpl>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as GeoLocation?,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      completedAt: freezed == completedAt
+          ? _value.completedAt
+          : completedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$JobImpl with DiagnosticableTreeMixin implements _Job {
-  const _$JobImpl(
-      {required this.id,
-      required this.customerId,
-      required this.customerName,
-      required this.address,
-      required this.scheduledStartTime,
-      required this.scheduledEndTime,
-      required final List<String> assignedContractors,
-      required this.status,
-      required final List<CleaningTask> tasks,
-      this.notes,
-      this.actualStartTime,
-      this.actualEndTime,
-      this.requiresKey = false,
-      this.photosRequired = false,
-      this.location})
+class _$JobModelImpl extends _JobModel {
+  const _$JobModelImpl(
+      {@HiveField(0) required this.id,
+      @HiveField(1) required this.customerId,
+      @HiveField(2) required this.customerName,
+      @HiveField(3) required this.address,
+      @HiveField(4) required this.scheduledStartTime,
+      @HiveField(5) required this.scheduledEndTime,
+      @HiveField(6) required final List<String> assignedContractors,
+      @HiveField(7) required this.status,
+      @HiveField(8) final List<CleaningTask> tasks = const [],
+      @HiveField(9) this.notes,
+      @HiveField(10) this.actualStartTime,
+      @HiveField(11) this.actualEndTime,
+      @HiveField(12) this.photosRequired = false,
+      @HiveField(13) this.location,
+      @HiveField(14) required this.createdAt,
+      @HiveField(15) this.completedAt})
       : _assignedContractors = assignedContractors,
-        _tasks = tasks;
+        _tasks = tasks,
+        super._();
 
-  factory _$JobImpl.fromJson(Map<String, dynamic> json) =>
-      _$$JobImplFromJson(json);
+  factory _$JobModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$JobModelImplFromJson(json);
 
   @override
+  @HiveField(0)
   final String id;
   @override
+  @HiveField(1)
   final String customerId;
   @override
+  @HiveField(2)
   final String customerName;
   @override
+  @HiveField(3)
   final String address;
   @override
+  @HiveField(4)
   final DateTime scheduledStartTime;
   @override
+  @HiveField(5)
   final DateTime scheduledEndTime;
   final List<String> _assignedContractors;
   @override
+  @HiveField(6)
   List<String> get assignedContractors {
     if (_assignedContractors is EqualUnmodifiableListView)
       return _assignedContractors;
@@ -335,9 +370,12 @@ class _$JobImpl with DiagnosticableTreeMixin implements _Job {
   }
 
   @override
+  @HiveField(7)
   final JobStatus status;
   final List<CleaningTask> _tasks;
   @override
+  @JsonKey()
+  @HiveField(8)
   List<CleaningTask> get tasks {
     if (_tasks is EqualUnmodifiableListView) return _tasks;
     // ignore: implicit_dynamic_type
@@ -345,166 +383,121 @@ class _$JobImpl with DiagnosticableTreeMixin implements _Job {
   }
 
   @override
+  @HiveField(9)
   final String? notes;
   @override
+  @HiveField(10)
   final DateTime? actualStartTime;
   @override
+  @HiveField(11)
   final DateTime? actualEndTime;
   @override
   @JsonKey()
-  final bool requiresKey;
-  @override
-  @JsonKey()
+  @HiveField(12)
   final bool photosRequired;
   @override
+  @HiveField(13)
   final GeoLocation? location;
-
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Job(id: $id, customerId: $customerId, customerName: $customerName, address: $address, scheduledStartTime: $scheduledStartTime, scheduledEndTime: $scheduledEndTime, assignedContractors: $assignedContractors, status: $status, tasks: $tasks, notes: $notes, actualStartTime: $actualStartTime, actualEndTime: $actualEndTime, requiresKey: $requiresKey, photosRequired: $photosRequired, location: $location)';
-  }
-
+  @HiveField(14)
+  final DateTime createdAt;
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'Job'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('customerId', customerId))
-      ..add(DiagnosticsProperty('customerName', customerName))
-      ..add(DiagnosticsProperty('address', address))
-      ..add(DiagnosticsProperty('scheduledStartTime', scheduledStartTime))
-      ..add(DiagnosticsProperty('scheduledEndTime', scheduledEndTime))
-      ..add(DiagnosticsProperty('assignedContractors', assignedContractors))
-      ..add(DiagnosticsProperty('status', status))
-      ..add(DiagnosticsProperty('tasks', tasks))
-      ..add(DiagnosticsProperty('notes', notes))
-      ..add(DiagnosticsProperty('actualStartTime', actualStartTime))
-      ..add(DiagnosticsProperty('actualEndTime', actualEndTime))
-      ..add(DiagnosticsProperty('requiresKey', requiresKey))
-      ..add(DiagnosticsProperty('photosRequired', photosRequired))
-      ..add(DiagnosticsProperty('location', location));
-  }
+  @HiveField(15)
+  final DateTime? completedAt;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$JobImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.customerId, customerId) ||
-                other.customerId == customerId) &&
-            (identical(other.customerName, customerName) ||
-                other.customerName == customerName) &&
-            (identical(other.address, address) || other.address == address) &&
-            (identical(other.scheduledStartTime, scheduledStartTime) ||
-                other.scheduledStartTime == scheduledStartTime) &&
-            (identical(other.scheduledEndTime, scheduledEndTime) ||
-                other.scheduledEndTime == scheduledEndTime) &&
-            const DeepCollectionEquality()
-                .equals(other._assignedContractors, _assignedContractors) &&
-            (identical(other.status, status) || other.status == status) &&
-            const DeepCollectionEquality().equals(other._tasks, _tasks) &&
-            (identical(other.notes, notes) || other.notes == notes) &&
-            (identical(other.actualStartTime, actualStartTime) ||
-                other.actualStartTime == actualStartTime) &&
-            (identical(other.actualEndTime, actualEndTime) ||
-                other.actualEndTime == actualEndTime) &&
-            (identical(other.requiresKey, requiresKey) ||
-                other.requiresKey == requiresKey) &&
-            (identical(other.photosRequired, photosRequired) ||
-                other.photosRequired == photosRequired) &&
-            (identical(other.location, location) ||
-                other.location == location));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      customerId,
-      customerName,
-      address,
-      scheduledStartTime,
-      scheduledEndTime,
-      const DeepCollectionEquality().hash(_assignedContractors),
-      status,
-      const DeepCollectionEquality().hash(_tasks),
-      notes,
-      actualStartTime,
-      actualEndTime,
-      requiresKey,
-      photosRequired,
-      location);
-
-  @JsonKey(ignore: true)
+  /// Create a copy of JobModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$JobImplCopyWith<_$JobImpl> get copyWith =>
-      __$$JobImplCopyWithImpl<_$JobImpl>(this, _$identity);
+  _$$JobModelImplCopyWith<_$JobModelImpl> get copyWith =>
+      __$$JobModelImplCopyWithImpl<_$JobModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$JobImplToJson(
+    return _$$JobModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _Job implements Job {
-  const factory _Job(
-      {required final String id,
-      required final String customerId,
-      required final String customerName,
-      required final String address,
-      required final DateTime scheduledStartTime,
-      required final DateTime scheduledEndTime,
-      required final List<String> assignedContractors,
-      required final JobStatus status,
-      required final List<CleaningTask> tasks,
-      final String? notes,
-      final DateTime? actualStartTime,
-      final DateTime? actualEndTime,
-      final bool requiresKey,
-      final bool photosRequired,
-      final GeoLocation? location}) = _$JobImpl;
+abstract class _JobModel extends JobModel {
+  const factory _JobModel(
+      {@HiveField(0) required final String id,
+      @HiveField(1) required final String customerId,
+      @HiveField(2) required final String customerName,
+      @HiveField(3) required final String address,
+      @HiveField(4) required final DateTime scheduledStartTime,
+      @HiveField(5) required final DateTime scheduledEndTime,
+      @HiveField(6) required final List<String> assignedContractors,
+      @HiveField(7) required final JobStatus status,
+      @HiveField(8) final List<CleaningTask> tasks,
+      @HiveField(9) final String? notes,
+      @HiveField(10) final DateTime? actualStartTime,
+      @HiveField(11) final DateTime? actualEndTime,
+      @HiveField(12) final bool photosRequired,
+      @HiveField(13) final GeoLocation? location,
+      @HiveField(14) required final DateTime createdAt,
+      @HiveField(15) final DateTime? completedAt}) = _$JobModelImpl;
+  const _JobModel._() : super._();
 
-  factory _Job.fromJson(Map<String, dynamic> json) = _$JobImpl.fromJson;
+  factory _JobModel.fromJson(Map<String, dynamic> json) =
+      _$JobModelImpl.fromJson;
 
   @override
+  @HiveField(0)
   String get id;
   @override
+  @HiveField(1)
   String get customerId;
   @override
+  @HiveField(2)
   String get customerName;
   @override
+  @HiveField(3)
   String get address;
   @override
+  @HiveField(4)
   DateTime get scheduledStartTime;
   @override
+  @HiveField(5)
   DateTime get scheduledEndTime;
   @override
+  @HiveField(6)
   List<String> get assignedContractors;
   @override
+  @HiveField(7)
   JobStatus get status;
   @override
+  @HiveField(8)
   List<CleaningTask> get tasks;
   @override
+  @HiveField(9)
   String? get notes;
   @override
+  @HiveField(10)
   DateTime? get actualStartTime;
   @override
+  @HiveField(11)
   DateTime? get actualEndTime;
   @override
-  bool get requiresKey;
-  @override
+  @HiveField(12)
   bool get photosRequired;
   @override
+  @HiveField(13)
   GeoLocation? get location;
   @override
-  @JsonKey(ignore: true)
-  _$$JobImplCopyWith<_$JobImpl> get copyWith =>
+  @HiveField(14)
+  DateTime get createdAt;
+  @override
+  @HiveField(15)
+  DateTime? get completedAt;
+
+  /// Create a copy of JobModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$JobModelImplCopyWith<_$JobModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -514,17 +507,29 @@ CleaningTask _$CleaningTaskFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CleaningTask {
+  @HiveField(0)
   String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  @HiveField(1)
+  String get title => throw _privateConstructorUsedError;
+  @HiveField(2)
+  String get description => throw _privateConstructorUsedError;
+  @HiveField(3)
   bool get isCompleted => throw _privateConstructorUsedError;
-  TaskType get type => throw _privateConstructorUsedError;
-  String? get notes => throw _privateConstructorUsedError;
-  List<String>? get photoUrls => throw _privateConstructorUsedError;
-  DateTime? get completedAt => throw _privateConstructorUsedError;
+  @HiveField(4)
   String? get completedBy => throw _privateConstructorUsedError;
+  @HiveField(5)
+  DateTime? get completedAt => throw _privateConstructorUsedError;
+  @HiveField(6)
+  List<String>? get photoUrls => throw _privateConstructorUsedError;
+  @HiveField(7)
+  List<String>? get pendingPhotos => throw _privateConstructorUsedError;
 
+  /// Serializes this CleaningTask to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CleaningTask
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CleaningTaskCopyWith<CleaningTask> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -536,14 +541,14 @@ abstract class $CleaningTaskCopyWith<$Res> {
       _$CleaningTaskCopyWithImpl<$Res, CleaningTask>;
   @useResult
   $Res call(
-      {String id,
-      String name,
-      bool isCompleted,
-      TaskType type,
-      String? notes,
-      List<String>? photoUrls,
-      DateTime? completedAt,
-      String? completedBy});
+      {@HiveField(0) String id,
+      @HiveField(1) String title,
+      @HiveField(2) String description,
+      @HiveField(3) bool isCompleted,
+      @HiveField(4) String? completedBy,
+      @HiveField(5) DateTime? completedAt,
+      @HiveField(6) List<String>? photoUrls,
+      @HiveField(7) List<String>? pendingPhotos});
 }
 
 /// @nodoc
@@ -556,51 +561,53 @@ class _$CleaningTaskCopyWithImpl<$Res, $Val extends CleaningTask>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CleaningTask
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
+    Object? title = null,
+    Object? description = null,
     Object? isCompleted = null,
-    Object? type = null,
-    Object? notes = freezed,
-    Object? photoUrls = freezed,
-    Object? completedAt = freezed,
     Object? completedBy = freezed,
+    Object? completedAt = freezed,
+    Object? photoUrls = freezed,
+    Object? pendingPhotos = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String,
       isCompleted: null == isCompleted
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
               as bool,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as TaskType,
-      notes: freezed == notes
-          ? _value.notes
-          : notes // ignore: cast_nullable_to_non_nullable
-              as String?,
-      photoUrls: freezed == photoUrls
-          ? _value.photoUrls
-          : photoUrls // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      completedAt: freezed == completedAt
-          ? _value.completedAt
-          : completedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       completedBy: freezed == completedBy
           ? _value.completedBy
           : completedBy // ignore: cast_nullable_to_non_nullable
               as String?,
+      completedAt: freezed == completedAt
+          ? _value.completedAt
+          : completedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      photoUrls: freezed == photoUrls
+          ? _value.photoUrls
+          : photoUrls // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      pendingPhotos: freezed == pendingPhotos
+          ? _value.pendingPhotos
+          : pendingPhotos // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ) as $Val);
   }
 }
@@ -614,14 +621,14 @@ abstract class _$$CleaningTaskImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
-      String name,
-      bool isCompleted,
-      TaskType type,
-      String? notes,
-      List<String>? photoUrls,
-      DateTime? completedAt,
-      String? completedBy});
+      {@HiveField(0) String id,
+      @HiveField(1) String title,
+      @HiveField(2) String description,
+      @HiveField(3) bool isCompleted,
+      @HiveField(4) String? completedBy,
+      @HiveField(5) DateTime? completedAt,
+      @HiveField(6) List<String>? photoUrls,
+      @HiveField(7) List<String>? pendingPhotos});
 }
 
 /// @nodoc
@@ -632,84 +639,98 @@ class __$$CleaningTaskImplCopyWithImpl<$Res>
       _$CleaningTaskImpl _value, $Res Function(_$CleaningTaskImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CleaningTask
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
+    Object? title = null,
+    Object? description = null,
     Object? isCompleted = null,
-    Object? type = null,
-    Object? notes = freezed,
-    Object? photoUrls = freezed,
-    Object? completedAt = freezed,
     Object? completedBy = freezed,
+    Object? completedAt = freezed,
+    Object? photoUrls = freezed,
+    Object? pendingPhotos = freezed,
   }) {
     return _then(_$CleaningTaskImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String,
       isCompleted: null == isCompleted
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
               as bool,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as TaskType,
-      notes: freezed == notes
-          ? _value.notes
-          : notes // ignore: cast_nullable_to_non_nullable
-              as String?,
-      photoUrls: freezed == photoUrls
-          ? _value._photoUrls
-          : photoUrls // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      completedAt: freezed == completedAt
-          ? _value.completedAt
-          : completedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       completedBy: freezed == completedBy
           ? _value.completedBy
           : completedBy // ignore: cast_nullable_to_non_nullable
               as String?,
+      completedAt: freezed == completedAt
+          ? _value.completedAt
+          : completedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      photoUrls: freezed == photoUrls
+          ? _value._photoUrls
+          : photoUrls // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      pendingPhotos: freezed == pendingPhotos
+          ? _value._pendingPhotos
+          : pendingPhotos // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$CleaningTaskImpl with DiagnosticableTreeMixin implements _CleaningTask {
+class _$CleaningTaskImpl extends _CleaningTask {
   const _$CleaningTaskImpl(
-      {required this.id,
-      required this.name,
-      required this.isCompleted,
-      required this.type,
-      this.notes,
-      final List<String>? photoUrls,
-      this.completedAt,
-      this.completedBy})
-      : _photoUrls = photoUrls;
+      {@HiveField(0) required this.id,
+      @HiveField(1) required this.title,
+      @HiveField(2) required this.description,
+      @HiveField(3) this.isCompleted = false,
+      @HiveField(4) this.completedBy,
+      @HiveField(5) this.completedAt,
+      @HiveField(6) final List<String>? photoUrls,
+      @HiveField(7) final List<String>? pendingPhotos})
+      : _photoUrls = photoUrls,
+        _pendingPhotos = pendingPhotos,
+        super._();
 
   factory _$CleaningTaskImpl.fromJson(Map<String, dynamic> json) =>
       _$$CleaningTaskImplFromJson(json);
 
   @override
+  @HiveField(0)
   final String id;
   @override
-  final String name;
+  @HiveField(1)
+  final String title;
   @override
+  @HiveField(2)
+  final String description;
+  @override
+  @JsonKey()
+  @HiveField(3)
   final bool isCompleted;
   @override
-  final TaskType type;
+  @HiveField(4)
+  final String? completedBy;
   @override
-  final String? notes;
+  @HiveField(5)
+  final DateTime? completedAt;
   final List<String>? _photoUrls;
   @override
+  @HiveField(6)
   List<String>? get photoUrls {
     final value = _photoUrls;
     if (value == null) return null;
@@ -718,64 +739,20 @@ class _$CleaningTaskImpl with DiagnosticableTreeMixin implements _CleaningTask {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<String>? _pendingPhotos;
   @override
-  final DateTime? completedAt;
-  @override
-  final String? completedBy;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CleaningTask(id: $id, name: $name, isCompleted: $isCompleted, type: $type, notes: $notes, photoUrls: $photoUrls, completedAt: $completedAt, completedBy: $completedBy)';
+  @HiveField(7)
+  List<String>? get pendingPhotos {
+    final value = _pendingPhotos;
+    if (value == null) return null;
+    if (_pendingPhotos is EqualUnmodifiableListView) return _pendingPhotos;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
   }
 
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CleaningTask'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('isCompleted', isCompleted))
-      ..add(DiagnosticsProperty('type', type))
-      ..add(DiagnosticsProperty('notes', notes))
-      ..add(DiagnosticsProperty('photoUrls', photoUrls))
-      ..add(DiagnosticsProperty('completedAt', completedAt))
-      ..add(DiagnosticsProperty('completedBy', completedBy));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CleaningTaskImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.isCompleted, isCompleted) ||
-                other.isCompleted == isCompleted) &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.notes, notes) || other.notes == notes) &&
-            const DeepCollectionEquality()
-                .equals(other._photoUrls, _photoUrls) &&
-            (identical(other.completedAt, completedAt) ||
-                other.completedAt == completedAt) &&
-            (identical(other.completedBy, completedBy) ||
-                other.completedBy == completedBy));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      name,
-      isCompleted,
-      type,
-      notes,
-      const DeepCollectionEquality().hash(_photoUrls),
-      completedAt,
-      completedBy);
-
-  @JsonKey(ignore: true)
+  /// Create a copy of CleaningTask
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CleaningTaskImplCopyWith<_$CleaningTaskImpl> get copyWith =>
@@ -789,223 +766,50 @@ class _$CleaningTaskImpl with DiagnosticableTreeMixin implements _CleaningTask {
   }
 }
 
-abstract class _CleaningTask implements CleaningTask {
+abstract class _CleaningTask extends CleaningTask {
   const factory _CleaningTask(
-      {required final String id,
-      required final String name,
-      required final bool isCompleted,
-      required final TaskType type,
-      final String? notes,
-      final List<String>? photoUrls,
-      final DateTime? completedAt,
-      final String? completedBy}) = _$CleaningTaskImpl;
+      {@HiveField(0) required final String id,
+      @HiveField(1) required final String title,
+      @HiveField(2) required final String description,
+      @HiveField(3) final bool isCompleted,
+      @HiveField(4) final String? completedBy,
+      @HiveField(5) final DateTime? completedAt,
+      @HiveField(6) final List<String>? photoUrls,
+      @HiveField(7) final List<String>? pendingPhotos}) = _$CleaningTaskImpl;
+  const _CleaningTask._() : super._();
 
   factory _CleaningTask.fromJson(Map<String, dynamic> json) =
       _$CleaningTaskImpl.fromJson;
 
   @override
+  @HiveField(0)
   String get id;
   @override
-  String get name;
+  @HiveField(1)
+  String get title;
   @override
+  @HiveField(2)
+  String get description;
+  @override
+  @HiveField(3)
   bool get isCompleted;
   @override
-  TaskType get type;
-  @override
-  String? get notes;
-  @override
-  List<String>? get photoUrls;
-  @override
-  DateTime? get completedAt;
-  @override
+  @HiveField(4)
   String? get completedBy;
   @override
-  @JsonKey(ignore: true)
+  @HiveField(5)
+  DateTime? get completedAt;
+  @override
+  @HiveField(6)
+  List<String>? get photoUrls;
+  @override
+  @HiveField(7)
+  List<String>? get pendingPhotos;
+
+  /// Create a copy of CleaningTask
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CleaningTaskImplCopyWith<_$CleaningTaskImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-GeoLocation _$GeoLocationFromJson(Map<String, dynamic> json) {
-  return _GeoLocation.fromJson(json);
-}
-
-/// @nodoc
-mixin _$GeoLocation {
-  double get latitude => throw _privateConstructorUsedError;
-  double get longitude => throw _privateConstructorUsedError;
-  double? get accuracy => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $GeoLocationCopyWith<GeoLocation> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $GeoLocationCopyWith<$Res> {
-  factory $GeoLocationCopyWith(
-          GeoLocation value, $Res Function(GeoLocation) then) =
-      _$GeoLocationCopyWithImpl<$Res, GeoLocation>;
-  @useResult
-  $Res call({double latitude, double longitude, double? accuracy});
-}
-
-/// @nodoc
-class _$GeoLocationCopyWithImpl<$Res, $Val extends GeoLocation>
-    implements $GeoLocationCopyWith<$Res> {
-  _$GeoLocationCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? latitude = null,
-    Object? longitude = null,
-    Object? accuracy = freezed,
-  }) {
-    return _then(_value.copyWith(
-      latitude: null == latitude
-          ? _value.latitude
-          : latitude // ignore: cast_nullable_to_non_nullable
-              as double,
-      longitude: null == longitude
-          ? _value.longitude
-          : longitude // ignore: cast_nullable_to_non_nullable
-              as double,
-      accuracy: freezed == accuracy
-          ? _value.accuracy
-          : accuracy // ignore: cast_nullable_to_non_nullable
-              as double?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$GeoLocationImplCopyWith<$Res>
-    implements $GeoLocationCopyWith<$Res> {
-  factory _$$GeoLocationImplCopyWith(
-          _$GeoLocationImpl value, $Res Function(_$GeoLocationImpl) then) =
-      __$$GeoLocationImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({double latitude, double longitude, double? accuracy});
-}
-
-/// @nodoc
-class __$$GeoLocationImplCopyWithImpl<$Res>
-    extends _$GeoLocationCopyWithImpl<$Res, _$GeoLocationImpl>
-    implements _$$GeoLocationImplCopyWith<$Res> {
-  __$$GeoLocationImplCopyWithImpl(
-      _$GeoLocationImpl _value, $Res Function(_$GeoLocationImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? latitude = null,
-    Object? longitude = null,
-    Object? accuracy = freezed,
-  }) {
-    return _then(_$GeoLocationImpl(
-      latitude: null == latitude
-          ? _value.latitude
-          : latitude // ignore: cast_nullable_to_non_nullable
-              as double,
-      longitude: null == longitude
-          ? _value.longitude
-          : longitude // ignore: cast_nullable_to_non_nullable
-              as double,
-      accuracy: freezed == accuracy
-          ? _value.accuracy
-          : accuracy // ignore: cast_nullable_to_non_nullable
-              as double?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$GeoLocationImpl with DiagnosticableTreeMixin implements _GeoLocation {
-  const _$GeoLocationImpl(
-      {required this.latitude, required this.longitude, this.accuracy});
-
-  factory _$GeoLocationImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GeoLocationImplFromJson(json);
-
-  @override
-  final double latitude;
-  @override
-  final double longitude;
-  @override
-  final double? accuracy;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'GeoLocation(latitude: $latitude, longitude: $longitude, accuracy: $accuracy)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'GeoLocation'))
-      ..add(DiagnosticsProperty('latitude', latitude))
-      ..add(DiagnosticsProperty('longitude', longitude))
-      ..add(DiagnosticsProperty('accuracy', accuracy));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$GeoLocationImpl &&
-            (identical(other.latitude, latitude) ||
-                other.latitude == latitude) &&
-            (identical(other.longitude, longitude) ||
-                other.longitude == longitude) &&
-            (identical(other.accuracy, accuracy) ||
-                other.accuracy == accuracy));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, latitude, longitude, accuracy);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$GeoLocationImplCopyWith<_$GeoLocationImpl> get copyWith =>
-      __$$GeoLocationImplCopyWithImpl<_$GeoLocationImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$GeoLocationImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _GeoLocation implements GeoLocation {
-  const factory _GeoLocation(
-      {required final double latitude,
-      required final double longitude,
-      final double? accuracy}) = _$GeoLocationImpl;
-
-  factory _GeoLocation.fromJson(Map<String, dynamic> json) =
-      _$GeoLocationImpl.fromJson;
-
-  @override
-  double get latitude;
-  @override
-  double get longitude;
-  @override
-  double? get accuracy;
-  @override
-  @JsonKey(ignore: true)
-  _$$GeoLocationImplCopyWith<_$GeoLocationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

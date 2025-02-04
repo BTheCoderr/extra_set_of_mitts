@@ -1,82 +1,146 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:two_local_gals_housekeeping/domain/repositories/auth_repository.dart';
+import '../../../domain/repositories/auth_repository.dart';
+import '../../../domain/entities/user.dart';
 
-part 'auth_event.dart';
-part 'auth_state.dart';
-part 'auth_bloc.freezed.dart';
+// Events
+abstract class AuthEvent {}
+
+class CheckAuthStatus extends AuthEvent {}
+
+class Login extends AuthEvent {
+  final String username;
+  final String password;
+
+  Login({required this.username, required this.password});
+}
+
+class SignUp extends AuthEvent {
+  final String username;
+  final String email;
+  final String password;
+
+  SignUp({
+    required this.username,
+    required this.email,
+    required this.password,
+  });
+}
+
+class LoginWithBiometrics extends AuthEvent {}
+
+class Logout extends AuthEvent {}
+
+// States
+abstract class AuthState {}
+
+class AuthInitial extends AuthState {}
+class AuthLoading extends AuthState {}
+class AuthAuthenticated extends AuthState {
+  final bool showWalkthrough;
+  final User? user;
+
+  AuthAuthenticated({
+    this.showWalkthrough = false,
+    this.user,
+  });
+}
+class AuthUnauthenticated extends AuthState {}
+class AuthError extends AuthState {
+  final String message;
+
+  AuthError(this.message);
+}
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository repository;
 
-  AuthBloc({required this.repository}) : super(const AuthState.initial()) {
-    on<AuthEvent>((event, emit) async {
-      await event.map(
-        loginWithCredentials: (e) async {
-          emit(const AuthState.loading());
-          
-          final isTokenValid = await repository.isTokenValid();
-          if (isTokenValid.isRight()) {
-            final isActive = await repository.isContractorActive();
-            
-            if (isActive.isRight()) {
-              final result = await repository.login(e.username, e.password);
-              
-              result.fold(
-                (failure) => emit(const AuthState.error('Incorrect Username or Password')),
-                (token) async {
-                  await repository.saveToken(token);
-                  final shouldShowWalkthrough = await repository.shouldShowWalkthrough();
-                  shouldShowWalkthrough.fold(
-                    (failure) => emit(AuthState.authenticated(token, showWalkthrough: true)),
-                    (show) => emit(AuthState.authenticated(token, showWalkthrough: show)),
-                  );
-                },
-              );
-            } else {
-              emit(const AuthState.error('Invalid login attempt. Please contact the main office'));
-            }
-          } else {
-            emit(const AuthState.error('Session expired. Please login again'));
-          }
-        },
-        loginWithBiometrics: (e) async {
-          emit(const AuthState.loading());
-          
-          final biometricsAvailable = await repository.checkBiometricAvailability();
-          
-          if (biometricsAvailable.isRight()) {
-            final result = await repository.loginWithBiometrics();
-            
-            result.fold(
-              (failure) => emit(const AuthState.error('Biometric authentication failed')),
-              (token) async {
-                await repository.saveToken(token);
-                final shouldShowWalkthrough = await repository.shouldShowWalkthrough();
-                shouldShowWalkthrough.fold(
-                  (failure) => emit(AuthState.authenticated(token, showWalkthrough: true)),
-                  (show) => emit(AuthState.authenticated(token, showWalkthrough: show)),
-                );
-              },
+  AuthBloc({required this.repository}) : super(AuthInitial()) {
+    on<CheckAuthStatus>((event, emit) async {
+      emit(AuthLoading());
+      final result = await repository.isLoggedIn();
+      await result.fold(
+        (failure) async => emit(AuthUnauthenticated()),
+        (isLoggedIn) async {
+          if (isLoggedIn) {
+            final shouldShowWalkthrough = await repository.shouldShowWalkthrough();
+            await shouldShowWalkthrough.fold(
+              (failure) async => emit(AuthAuthenticated()),
+              (show) async => emit(AuthAuthenticated(showWalkthrough: show)),
             );
           } else {
-            emit(const AuthState.error('Biometric authentication not available'));
+            emit(AuthUnauthenticated());
           }
         },
-        checkLocationStatus: (e) async {
-          final result = await repository.isLocationEnabled();
-          result.fold(
-            (failure) => emit(const AuthState.locationDisabled()),
-            (enabled) => emit(enabled ? const AuthState.locationEnabled() : const AuthState.locationDisabled()),
-          );
+      );
+    });
+
+    on<Login>((event, emit) async {
+      emit(AuthLoading());
+      final result = await repository.login(event.username, event.password);
+      await result.fold(
+        (failure) async => emit(AuthError('Login failed')),
+        (success) async {
+          if (success) {
+            final shouldShowWalkthrough = await repository.shouldShowWalkthrough();
+            await shouldShowWalkthrough.fold(
+              (failure) async => emit(AuthAuthenticated()),
+              (show) async => emit(AuthAuthenticated(showWalkthrough: show)),
+            );
+          } else {
+            emit(AuthError('Login failed'));
+          }
         },
-        logout: (e) async {
-          await repository.clearToken();
-          emit(const AuthState.unauthenticated());
+      );
+    });
+
+    on<SignUp>((event, emit) async {
+      emit(AuthLoading());
+      final result = await repository.signUp(
+        username: event.username,
+        email: event.email,
+        password: event.password,
+      );
+      await result.fold(
+        (failure) async => emit(AuthError('Sign up failed')),
+        (success) async {
+          if (success) {
+            final shouldShowWalkthrough = await repository.shouldShowWalkthrough();
+            await shouldShowWalkthrough.fold(
+              (failure) async => emit(AuthAuthenticated()),
+              (show) async => emit(AuthAuthenticated(showWalkthrough: show)),
+            );
+          } else {
+            emit(AuthError('Sign up failed'));
+          }
         },
-        setWalkthroughShown: (e) async {
-          await repository.setWalkthroughShown(true);
+      );
+    });
+
+    on<LoginWithBiometrics>((event, emit) async {
+      emit(AuthLoading());
+      final result = await repository.loginWithBiometrics();
+      await result.fold(
+        (failure) async => emit(AuthError('Biometric authentication failed')),
+        (success) async {
+          if (success) {
+            final shouldShowWalkthrough = await repository.shouldShowWalkthrough();
+            await shouldShowWalkthrough.fold(
+              (failure) async => emit(AuthAuthenticated()),
+              (show) async => emit(AuthAuthenticated(showWalkthrough: show)),
+            );
+          } else {
+            emit(AuthError('Biometric authentication failed'));
+          }
         },
+      );
+    });
+
+    on<Logout>((event, emit) async {
+      emit(AuthLoading());
+      final result = await repository.logout();
+      await result.fold(
+        (failure) async => emit(AuthError('Logout failed')),
+        (_) async => emit(AuthUnauthenticated()),
       );
     });
   }

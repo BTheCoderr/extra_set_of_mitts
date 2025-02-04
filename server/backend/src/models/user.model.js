@@ -24,15 +24,14 @@ const userSchema = new mongoose.Schema({
         default: ''
     },
     address: {
-        street: String,
-        city: String,
-        state: String,
-        zipCode: String
+        type: String,
+        default: '',
+        trim: true
     },
     role: {
         type: String,
-        enum: ['admin', 'cleaner'],
-        default: 'cleaner'
+        enum: ['user', 'admin'],
+        default: 'user'
     },
     unavailability: [{
         date: Date,

@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:two_local_gals_housekeeping/config/routes/routes.dart';
-import 'package:two_local_gals_housekeeping/constants/app_colors.dart';
-import 'package:two_local_gals_housekeeping/constants/app_fonts.dart';
-import 'package:two_local_gals_housekeeping/constants/app_images.dart';
-import 'package:two_local_gals_housekeeping/constants/app_sizes.dart';
-import 'package:two_local_gals_housekeeping/constants/app_styling.dart';
-import 'package:two_local_gals_housekeeping/presentation/bloc/auth/auth_bloc.dart';
-import 'package:two_local_gals_housekeeping/view/widget/common_image_view_widget.dart';
-import 'package:two_local_gals_housekeeping/view/widget/custom_rectangle_btn.dart';
-import 'package:two_local_gals_housekeeping/view/widget/custom_textfield.dart';
-import 'package:two_local_gals_housekeeping/view/widget/my_text_widget.dart';
+import 'package:extra_set_of_mitts/config/routes/routes.dart';
+import 'package:extra_set_of_mitts/constants/app_colors.dart';
+import 'package:extra_set_of_mitts/constants/app_fonts.dart';
+import 'package:extra_set_of_mitts/constants/app_images.dart';
+import 'package:extra_set_of_mitts/constants/app_sizes.dart';
+import 'package:extra_set_of_mitts/constants/app_styling.dart';
+import 'package:extra_set_of_mitts/presentation/bloc/auth/auth_bloc.dart';
+import 'package:extra_set_of_mitts/view/widget/common_image_view_widget.dart';
+import 'package:extra_set_of_mitts/view/widget/custom_rectangle_btn.dart';
+import 'package:extra_set_of_mitts/view/widget/custom_textfield.dart';
+import 'package:extra_set_of_mitts/view/widget/my_text_widget.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _isPasswordVisible = false;
 
   @override
   void dispose() {
@@ -34,137 +34,100 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthBloc, AuthState>(
-      listener: (context, state) {
-        state.maybeMap(
-          authenticated: (state) {
-            if (state.showWalkthrough) {
-              Get.offNamed(AppLinks.onboarding);
-            } else {
-              Get.offNamed(AppLinks.home);
-            }
-          },
-          error: (state) {
+    return Scaffold(
+      body: BlocConsumer<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthError) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
-                backgroundColor: Colors.red,
-              ),
+              SnackBar(content: Text(state.message)),
             );
-          },
-          orElse: () {},
-        );
-      },
-      child: Container(
-        decoration: AppStyling().background_image_decoration(),
-        child: Scaffold(
-          backgroundColor: kTransparentColor,
-          body: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AppStyling().verticalGap(100),
-                  CommonImageView(
-                    height: 174,
-                    imagePath: Assets.imagesLogoIcon,
-                  ),
-                  AppStyling().verticalGap(40),
-                  CustomTextField(
-                    controller: _usernameController,
-                    hintText: 'Username',
-                    prefixIcon: Assets.imagesPersonIcon,
-                  ),
-                  AppStyling().verticalGap(20),
-                  CustomTextField(
-                    controller: _passwordController,
-                    hintText: 'Password',
-                    prefixIcon: Assets.imagesKeyIcon,
-                    obscureText: !_isPasswordVisible,
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                        color: kTertiaryColor,
+          }
+        },
+        builder: (context, state) {
+          return Center(
+            child: Card(
+              margin: const EdgeInsets.all(16),
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Extra Set of Mitts',
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
-                      onPressed: () {
-                        setState(() {
-                          _isPasswordVisible = !_isPasswordVisible;
-                        });
-                      },
-                    ),
-                  ),
-                  AppStyling().verticalGap(40),
-                  BlocBuilder<AuthBloc, AuthState>(
-                    builder: (context, state) {
-                      return Row(
+                      const SizedBox(height: 32),
+                      TextFormField(
+                        controller: _usernameController,
+                        decoration: const InputDecoration(
+                          labelText: 'Username',
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your username';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 16),
+                      TextFormField(
+                        controller: _passwordController,
+                        decoration: const InputDecoration(
+                          labelText: 'Password',
+                          border: OutlineInputBorder(),
+                        ),
+                        obscureText: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your password';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 32),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Expanded(
-                            child: CustomRectangleBtn(
-                              onPressed: state.maybeMap(
-                                loading: (_) => null,
-                                orElse: () => () {
-                                  context.read<AuthBloc>().add(
-                                    AuthEvent.loginWithCredentials(
-                                      username: _usernameController.text,
-                                      password: _passwordController.text,
-                                    ),
-                                  );
-                                },
-                              ),
-                              txt: 'Log In',
-                              isLoading: state.maybeMap(
-                                loading: (_) => true,
-                                orElse: () => false,
-                              ),
-                            ),
+                          ElevatedButton(
+                            onPressed: state is AuthLoading
+                                ? null
+                                : () {
+                                    if (_formKey.currentState!.validate()) {
+                                      context.read<AuthBloc>().add(
+                                            Login(
+                                              username: _usernameController.text,
+                                              password: _passwordController.text,
+                                            ),
+                                          );
+                                    }
+                                  },
+                            child: const Text('Login'),
+                          ),
+                          ElevatedButton(
+                            onPressed: state is AuthLoading
+                                ? null
+                                : () {
+                                    context.read<AuthBloc>().add(LoginWithBiometrics());
+                                  },
+                            child: const Text('Use Biometrics'),
                           ),
                         ],
-                      );
-                    },
-                  ),
-                  AppStyling().verticalGap(40),
-                  Align(
-                    alignment: Alignment.center,
-                    child: GestureDetector(
-                      onTap: () {
-                        context.read<AuthBloc>().add(
-                          const AuthEvent.loginWithBiometrics(),
-                        );
-                      },
-                      child: Container(
-                        height: 56,
-                        width: 54,
-                        decoration: BoxDecoration(
-                          color: kPrimaryColor,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Center(
-                          child: CommonImageView(
-                            imagePath: Assets.imagesFingerPrint,
-                            height: 24,
-                            width: 22,
-                          ),
-                        ),
                       ),
-                    ),
+                      if (state is AuthLoading)
+                        const Padding(
+                          padding: EdgeInsets.only(top: 16),
+                          child: CircularProgressIndicator(),
+                        ),
+                    ],
                   ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: MyText(
-                      paddingTop: 26,
-                      text: 'Use Fingerprint',
-                      weight: FontWeight.w500,
-                      size: 20,
-                      fontFamily: AppFonts.Jost,
-                      color: kTertiaryColor,
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
